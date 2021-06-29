@@ -1,0 +1,12 @@
+{
+  "name": "minimalistApp",
+  "displayName": "minimalistApp",
+  "expo": {
+    "name": "minimalistApp",
+    "slug": "minimalistApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
