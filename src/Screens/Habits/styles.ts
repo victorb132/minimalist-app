@@ -31,7 +31,6 @@ export const AvatarImage = styled.Image`
 
 export const Form = styled.View`
   flex: 1;
-  justify-content: space-between;
   width: 100%;
 
   padding: 24px;

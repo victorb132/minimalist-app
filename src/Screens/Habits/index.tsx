@@ -10,6 +10,7 @@ import {
   Header,
   ProfileAvatar,
   AvatarImage,
+  Form
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -43,14 +44,24 @@ export function Habits() {
         </ProfileAvatar>
       </Header>
 
-      <InputForm 
-        name="name"
-        control={control}
-        placeholder="Nome"
-        autoCapitalize="sentences"
-        autoCorrect={false}
-        error={errors.name && errors.name.message}
-      />
+      <Form>
+        <InputForm 
+          name="name"
+          control={control}
+          placeholder="Nome"
+          autoCapitalize="sentences"
+          autoCorrect={false}
+          error={errors.name && errors.name.message}
+        />
+        <InputForm 
+          name="name"
+          control={control}
+          placeholder="Nome"
+          autoCapitalize="sentences"
+          autoCorrect={false}
+          error={errors.name && errors.name.message}
+        />
+      </Form>
     </Container>
   );
 }

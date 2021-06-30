@@ -14,7 +14,7 @@ export const Container = styled(TextInput)<Props>`
   font-size: ${RFValue(14)}px;
   color: ${({ theme }) => theme.colors.title};
 
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.sub_title};
   border-radius: 5px;
 
   margin-bottom: 8px;
