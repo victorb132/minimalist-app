@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { CheckBox } from '../../components/Checkbox';
+import { CardHabit } from '../../components/CardHabit'
 
 import {
   Container,
@@ -10,14 +13,7 @@ import {
   SubTitle,
   Habits,
   HabitsTitle,
-  Card,
-  EmojiContainer,
-  Emoji,
-  TaskContainer,
-  TaskTitle,
-  TaskSubTitle,
   MiniTask,
-  CheckMiniTask,
   TitleMiniTask,
   MiniTaskTitle,
   WrapperCards,
@@ -25,6 +21,12 @@ import {
 } from './styles';
 
 export function Home(){
+  const [miniTask, setMiniTask] = useState(false);
+
+  function handleChangeMiniTask() {
+    setMiniTask(!miniTask)
+  }
+
   return (
     <Container>
       <Header>
@@ -34,33 +36,15 @@ export function Home(){
       </Header>
 
       <ContentText>
-        <Title>Good Morning, Victor</Title>
-        <SubTitle>Let's crush this day.</SubTitle>
+        <Title>Bom dia, Victor</Title>
+        <SubTitle>Vamos enfrentar o dia.</SubTitle>
       </ContentText>
 
       <Habits>
         <HabitsTitle>HABITS</HabitsTitle>
-        {/* TODO - Transformar em componente */}
         <WrapperCards>
-          <Card>
-            <EmojiContainer>
-              <Emoji>🏃🏾‍♂️</Emoji>
-            </EmojiContainer>
-            <TaskContainer>
-              <TaskTitle>Read something</TaskTitle>
-              <TaskSubTitle>0 / 2 times today</TaskSubTitle>
-            </TaskContainer>
-          </Card>
-
-          <Card>
-            <EmojiContainer>
-              <Emoji>🏃🏾‍♂️</Emoji>
-            </EmojiContainer>
-            <TaskContainer>
-              <TaskTitle>Read something</TaskTitle>
-              <TaskSubTitle>0 / 2 times today</TaskSubTitle>
-            </TaskContainer>
-          </Card>
+          <CardHabit title="Correr de manhã" times='0 / 2' name="run" />
+          <CardHabit title="Correr de tarde" times='0 / 4' name="run"/>
         </WrapperCards>
 
       </Habits>
@@ -68,15 +52,15 @@ export function Home(){
       
       <MiniTask>
         <MiniTaskTitle>MINI TASKS</MiniTaskTitle>
-          <ContentTask>
-            <CheckMiniTask />
+          <ContentTask onPress={handleChangeMiniTask}>
+            <CheckBox  onPress={handleChangeMiniTask} selected={miniTask} style={{ marginRight: 5 }} />
             <TitleMiniTask>
               Grocery shopping
             </TitleMiniTask>
           </ContentTask>
 
-          <ContentTask>
-            <CheckMiniTask />
+          <ContentTask onPress={handleChangeMiniTask}>
+            <CheckBox onPress={handleChangeMiniTask} selected={miniTask} style={{ marginRight: 5 }} />
             <TitleMiniTask>
               One concept design
             </TitleMiniTask>

@@ -3,7 +3,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.ScrollView`
   flex: 1;
-  background-color: #FFFFFF;
+  background-color: ${({ theme }) => theme.colors.secondary};
 `;
 
 export const Header = styled.View`
@@ -20,7 +20,7 @@ export const ProfileAvatar = styled.View`
   height: 50px;
   border-radius: 90px;
 
-  background-color: #000;
+  background-color: ${({ theme }) => theme.colors.primary};
   margin-top: 48px;
 `;
 
@@ -37,13 +37,14 @@ export const ContentText = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(25)}px;
-  font-weight: bold;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const SubTitle = styled.Text`
   font-size: ${RFValue(15)}px;
-  color: #9C9C9C;
-  font-weight: 300;
+  color: ${({ theme }) => theme.colors.sub_title};
+  font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
 export const Habits = styled.View`
@@ -52,58 +53,13 @@ export const Habits = styled.View`
 `;
 
 export const HabitsTitle = styled.Text`
-  font-size: ${RFValue(10)}px;
-  color: #9C9C9C;
-  font-weight: bold;
+  font-size: ${RFValue(12)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.sub_title};
 `;
 
 export const WrapperCards = styled.View`
   padding: 0 40px 0px 0px;
-`;
-
-export const Card = styled.View`
-  flex-direction: row;
-  align-items: center;
-
-  /* border-width: 0.2px; */
-  border-radius: 10px;
-
-  background-color: #000;
-
-  padding: 20px;
-
-  margin-top: 20px;
-`;
-
-export const EmojiContainer = styled.View`
-  height: 40px;
-  width: 40px;
-
-  background-color: #F0F0F0;
-
-  border-radius: 8px;
-
-  align-items: center;
-  justify-content: center;
-
-  margin-right: 20px;
-`;
-
-export const Emoji = styled.Text`
-  font-size: ${RFValue(25)}px;
-`;
-
-export const TaskContainer = styled.View``;
-
-export const TaskTitle = styled.Text`
-  font-size: ${RFValue(15)}px;
-  font-weight: bold;
-  color: #FFFFFF;
-`;
-
-export const TaskSubTitle = styled.Text`
-  font-size: ${RFValue(12)}px;
-  color: #FFFFFF;
 `;
 
 export const MiniTask = styled.View`
@@ -112,30 +68,20 @@ export const MiniTask = styled.View`
 `;
 
 export const MiniTaskTitle = styled.Text`
-    font-size: ${RFValue(10)}px;
-    color: #9C9C9C;
-    font-weight: bold; 
+  font-size: ${RFValue(12)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.sub_title};
 `;
 
-export const ContentTask = styled.View`
+export const ContentTask = styled.TouchableOpacity`
   flex-direction: row;
   margin-top: 20px;
   
   align-items: center;
 `;
 
-export const CheckMiniTask = styled.View`
-  height: 20px;
-  width: 20px;
-
-  border-radius: 10px;
-
-  background-color: #9C9C9C;
-
-  margin-right: 10px;
-`;
-
 export const TitleMiniTask = styled.Text`
-    font-size: ${RFValue(15)}px;
-    font-weight: 500;
+  font-size: ${RFValue(15)}px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  color: ${({ theme }) => theme.colors.primary};
 `;
