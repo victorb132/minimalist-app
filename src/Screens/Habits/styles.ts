@@ -1,6 +1,8 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import Modal from 'react-native-modal';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.secondary};
 `;
@@ -35,3 +37,31 @@ export const Form = styled.View`
 
   padding: 24px;
 `;
+
+export const TitlePage = styled.Text`
+  font-size: ${RFValue(25)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.primary};
+  
+  padding-left: 24px;
+`;
+
+export const ModalCategory = styled(Modal as any)`
+  justify-content: flex-end;
+  margin: 0px;
+`;
+
+export const ContainerCategory = styled.View`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  padding: 22px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border-color: rgba(0, 0, 0, 0.1);
+`;
+
+export const TransactionsTypes = styled.View`
+  margin-top: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+`

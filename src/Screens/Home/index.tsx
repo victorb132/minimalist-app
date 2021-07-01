@@ -41,7 +41,7 @@ export function Home(){
       </ContentText>
 
       <Habits>
-        <HabitsTitle>HABITS</HabitsTitle>
+        <HabitsTitle>HÁBITOS</HabitsTitle>
         <WrapperCards>
           <CardHabit title="Correr de manhã" times='0 / 2' name="run" />
           <CardHabit title="Correr de tarde" times='0 / 4' name="run"/>
@@ -51,7 +51,7 @@ export function Home(){
 
       
       <MiniTask>
-        <MiniTaskTitle>MINI TASKS</MiniTaskTitle>
+        <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
           <ContentTask onPress={handleChangeMiniTask}>
             <CheckBox  onPress={handleChangeMiniTask} selected={miniTask} style={{ marginRight: 5 }} />
             <TitleMiniTask>

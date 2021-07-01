@@ -8,6 +8,8 @@ export default {
     
     attention: '#E83F5B',
     success: '#12A454',
+
+    gray_light: '#d3d3d3'
   },
   fonts: {
     regular: 'Poppins_400Regular',
