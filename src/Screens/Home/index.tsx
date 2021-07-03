@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { CheckBox } from '../../components/Checkbox';
 import { CardHabit } from '../../components/CardHabit'
 
+import avatar from '../../../assets/avatar.png';
+
 import {
   Container,
   Header,
@@ -31,7 +33,7 @@ export function Home(){
     <Container>
       <Header>
         <ProfileAvatar>
-          <AvatarImage source={{ uri: 'https://avatars.githubusercontent.com/u/32309553?v=4' }}/>
+          <AvatarImage source={avatar}/>
         </ProfileAvatar>
       </Header>
 

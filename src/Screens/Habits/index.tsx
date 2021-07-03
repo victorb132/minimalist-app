@@ -7,6 +7,8 @@ import { InputForm } from '../../components/Forms/InputForm';
 import { Button } from '../../components/Forms/Button';
 import { CategorySelectButton } from '../../components/Forms/CategorySelectButton';
 
+import avatar from '../../../assets/avatar.png';
+
 import {
   Container,
   Header,
@@ -66,7 +68,7 @@ export function Habits() {
     <Container>
       <Header>
         <ProfileAvatar>
-          <AvatarImage source={{ uri: 'https://avatars.githubusercontent.com/u/32309553?v=4' }} />
+          <AvatarImage source={avatar} />
         </ProfileAvatar>
       </Header>
 

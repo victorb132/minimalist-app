@@ -13,6 +13,7 @@ import {
 
 import { Routes } from './src/routes';
 import theme from './src/styles/theme';
+import { Timer } from './src/Screens/Timer';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,7 +28,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      {/* <Routes /> */}
+      <Timer />
     </ThemeProvider>
   )
 }
