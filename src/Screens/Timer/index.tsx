@@ -9,7 +9,7 @@ import {
 export function Timer(){
   const [timer, setTimer] = useState(100);
 
-  // setInterval(() => setTimer(timer - 1), 10);
+  setInterval(() => setTimer(timer - 1), 10);
 
   return (
     <Container>
