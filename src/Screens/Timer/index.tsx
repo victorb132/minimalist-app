@@ -7,11 +7,10 @@ import {
 } from './styles';
 
 export function Timer(){
-  const [timer, setTimer] = useState(100);
 
   return (
     <Container>
-      <CircularProgress progress={timer}/>
+      <CircularProgress progress={100}/>
     </Container>
   );
 }
