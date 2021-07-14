@@ -10,7 +10,7 @@ export function Timer(){
 
   return (
     <Container>
-      <CircularProgress progress={100}/>
+      {/* <CircularProgress progress={100}/> */}
     </Container>
   );
 }
