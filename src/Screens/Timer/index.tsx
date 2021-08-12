@@ -6,11 +6,27 @@ import {
   Container
 } from './styles';
 
-export function Timer(){
+interface TimerProps {
+  minutes?: number;
+}
+
+export function Timer({ minutes = 60 }: TimerProps){
+  const [timerCount, setTimer] = useState(minutes)
+
+useEffect(() => {
+  let interval = setInterval(() => {
+    setTimer(lastTimerCount => {
+        lastTimerCount <= 1 && clearInterval(interval)
+        return lastTimerCount - 1
+    })
+  }, 1000) //each count lasts for a second
+  //cleanup the interval on complete
+  return () => clearInterval(interval)
+}, []);
 
   return (
     <Container>
-      <CircularProgress progress={100}/>
+      <CircularProgress progress={timerCount}/>
     </Container>
   );
 }

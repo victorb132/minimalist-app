@@ -1,10 +1,12 @@
 import React, { useRef, useEffect } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Text } from 'react-native';
 
 import {
   EmptyCircle,
   Indicator,
-  CoverIndicator
+  CoverIndicator,
+  ContainerText,
+  TextTimer
 } from './styles';
 
 interface CircularProgressProps {
@@ -45,12 +47,17 @@ export function CircularProgress({ progress = 100 }: CircularProgressProps){
 
   return (
     <EmptyCircle>
+      
       <Indicator style={{ transform: [{ rotate: firstIndicatorRotate }] }}/>
       <CoverIndicator />
       <Indicator style={{ 
         transform: [{ rotate: secondIndicatorRotate }], 
         opacity: secondIndicatorVisibility 
       }} />
+
+      <ContainerText>
+        <TextTimer>{progress}</TextTimer>
+      </ContainerText>
     </EmptyCircle>
   );
 }

@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { Animated } from 'react-native';
 
 const EMPTY_COLOR = '#a0a0a1';
-const PROGRESS_COLOR = '#0085FF';
+const PROGRESS_COLOR = '#000';
 const SIZE = 200;
 
 export const CircleBase = styled(Animated.View)`
@@ -17,6 +18,16 @@ export const EmptyCircle = styled(CircleBase)`
   justify-content: center;
   align-items: center;
   transform: rotate(-45deg);
+`;
+
+export const ContainerText = styled.Text`
+  transform: rotate(45deg);
+`;
+
+export const TextTimer = styled.Text`
+  font-size: ${RFValue(40)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.title};
 `;
 
 export const Indicator = styled(CircleBase)`
