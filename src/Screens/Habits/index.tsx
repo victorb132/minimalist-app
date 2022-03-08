@@ -90,6 +90,7 @@ export function Habits() {
       id: String(uuid.v4()),
       title: form.title,
       times: form.times,
+      timesDone: 0,
       timer: form.timer,
       type: transactionType,
       category: category.key,

@@ -30,6 +30,7 @@ interface HabitProps {
   category: string;
   timer: string;
   times: number;
+  timesDone: number;
   title: string;
   type: string;
 }
@@ -84,7 +85,7 @@ export function Home(){
   }
 
   async function handleTimer(habit: HabitProps) {
-    navigation.navigate('Timer', habit)
+    navigation.navigate('Timer', undefined)
   }
 
   useEffect(() => {
@@ -106,7 +107,7 @@ export function Home(){
       </Header>
 
       <ContentText>
-        <Title>Bom dia, Victor</Title>
+        <Title>Bom dia</Title>
         <SubTitle>Vamos enfrentar o dia.</SubTitle>
       </ContentText>
 
@@ -134,7 +135,7 @@ export function Home(){
         <HabitsTitle>HÁBITOS</HabitsTitle>
         <WrapperCards>
           {habits.map((habit) => 
-            <CardHabit key={habit.id} title={habit.title} times={String(habit.times)} name={habit.category} onPress={() => handleTimer(habit)} />
+            <CardHabit key={habit.id} title={habit.title} times={String(habit.times)} timesDone={habit.timesDone} name={habit.category} onPress={() => handleTimer(habit)} />
           )}
         </WrapperCards>
 

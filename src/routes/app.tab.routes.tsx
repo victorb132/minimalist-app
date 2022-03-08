@@ -9,8 +9,8 @@ import RegisterSvg from '../assets/register.svg';
 import AppleSvg from '../assets/apple.svg';
 
 import CustomTab from '../components/customTab/bottom.tab';
-import { AppStackRoutes } from './app.stack.routes';
 import { useTheme } from 'styled-components';
+import { Home } from '../Screens/Home';
 
 export type RootTabParamList = {
   StackRoutes: undefined;
@@ -18,7 +18,7 @@ export type RootTabParamList = {
   MiniTask: undefined;
 };
 
-const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 export function AppTabRoutes(){
   const theme = useTheme();
@@ -33,8 +33,8 @@ export function AppTabRoutes(){
       }}
     >
       <Screen 
-        name="StackRoutes"
-        component={AppStackRoutes}
+        name="Home"
+        component={Home}
         options={{ 
           tabBarIcon: (({ color }) => (
             <HomeSvg width={30} height={30} fill={color} />

@@ -2,15 +2,15 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Home } from '../Screens/Home';
 import { Timer } from '../Screens/Timer';
+import { AppTabRoutes } from './app.tab.routes';
 
 export type RootStackParamList = {
   Home: undefined;
   Timer: undefined;
 };
 
-const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
+const { Navigator, Screen } = createStackNavigator();
 
 export function AppStackRoutes(){
   return(
@@ -18,8 +18,8 @@ export function AppStackRoutes(){
       headerShown: false
     }}>
       <Screen 
-        name="Home"
-        component={Home}
+        name="AppTab"
+        component={AppTabRoutes}
       />
       <Screen 
         name="Timer"
