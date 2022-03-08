@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
+import uuid from 'react-native-uuid';
 
 import { InputForm } from '../../components/Forms/InputForm';
 import { Button } from '../../components/Forms/Button';
@@ -86,6 +87,7 @@ export function Habits() {
     }
 
     const newHabit = {
+      id: String(uuid.v4()),
       title: form.title,
       times: form.times,
       timer: form.timer,

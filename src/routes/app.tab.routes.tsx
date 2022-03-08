@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home } from '../Screens/Home';
 import { Habits } from '../Screens/Habits';
 import { MiniTask } from '../Screens/MiniTask';
 
@@ -10,16 +9,23 @@ import RegisterSvg from '../assets/register.svg';
 import AppleSvg from '../assets/apple.svg';
 
 import CustomTab from '../components/customTab/bottom.tab';
+import { AppStackRoutes } from './app.stack.routes';
 import { useTheme } from 'styled-components';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+export type RootTabParamList = {
+  StackRoutes: undefined;
+  Habits: undefined;
+  MiniTask: undefined;
+};
+
+const { Navigator, Screen } = createBottomTabNavigator<RootTabParamList>();
 
 export function AppTabRoutes(){
   const theme = useTheme();
 
   return(
     <Navigator
-      tabBar={(props) => (
+      tabBar={(props: any) => (
         <CustomTab color={theme.colors.primary} {...props} />
       )}
       tabBarOptions={{
@@ -27,9 +33,9 @@ export function AppTabRoutes(){
       }}
     >
       <Screen 
-        name="Home"
-        component={Home}
-        options={{
+        name="StackRoutes"
+        component={AppStackRoutes}
+        options={{ 
           tabBarIcon: (({ color }) => (
             <HomeSvg width={30} height={30} fill={color} />
           ))
