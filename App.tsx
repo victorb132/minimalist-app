@@ -29,7 +29,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* <Routes /> */}
-      <Timer />
+      <Timer minutes={70}/>
     </ThemeProvider>
   )
 }

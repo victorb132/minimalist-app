@@ -1,32 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { CircularProgress } from '../../components/CircularProgress';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 import {
-  Container
+  Container,
+  TimerText
 } from './styles';
 
 interface TimerProps {
   minutes?: number;
 }
+interface RemaningProps {
+  remainingTime: number;
+}
 
 export function Timer({ minutes = 60 }: TimerProps){
-  const [timerCount, setTimer] = useState(minutes)
 
-useEffect(() => {
-  let interval = setInterval(() => {
-    setTimer(lastTimerCount => {
-        lastTimerCount <= 1 && clearInterval(interval)
-        return lastTimerCount - 1
-    })
-  }, 1000) //each count lasts for a second
-  //cleanup the interval on complete
-  return () => clearInterval(interval)
-}, []);
+  const children = ({ remainingTime }: RemaningProps) => {
+    const minutes = Math.floor(remainingTime / 60)
+    const seconds = remainingTime % 60
+    const secondsWithZero = String(seconds).padStart(2, '0')
+
+    return(
+    <TimerText>
+      {remainingTime === 0 ? '0' : `${minutes}:${secondsWithZero}`}
+    </TimerText>)
+  }
 
   return (
     <Container>
-      <CircularProgress progress={timerCount}/>
+      <CountdownCircleTimer
+        isPlaying
+        duration={minutes}
+        colors={['#000', '#F7B801', '#A30000', '#A30000']}
+        colorsTime={[7, 5, 2, 0]}
+      >
+        {children}
+      </CountdownCircleTimer>
     </Container>
   );
 }
