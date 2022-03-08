@@ -31,7 +31,7 @@ export function AppTabRoutes(){
         component={Home}
         options={{
           tabBarIcon: (({ color }) => (
-            <HomeSvg width={30} height={30} fill={"#fff"} />
+            <HomeSvg width={30} height={30} fill={color} />
           ))
         }}
       />
@@ -40,7 +40,7 @@ export function AppTabRoutes(){
         component={Habits}
         options={{ 
           tabBarIcon: (({ color }) => (
-            <AppleSvg width={30} height={30} fill={"#fff"} />
+            <AppleSvg width={30} height={30} fill={color} />
           ))
         }}
       />
@@ -49,7 +49,7 @@ export function AppTabRoutes(){
         component={MiniTask}
         options={{ 
           tabBarIcon: (({ color }) => (
-            <RegisterSvg width={30} height={30} fill={"#fff"} />
+            <RegisterSvg width={30} height={30} fill={color} />
           ))
         }}
       />

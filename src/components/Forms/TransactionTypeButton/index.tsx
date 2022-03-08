@@ -10,11 +10,12 @@ import {
 
 const icons = {
   run: '🏃🏾‍♂️',
-  book: '📚'
+  book: '📚',
+  other: '⏳'
 }
 
 interface Props extends RectButtonProps {
-  type: 'run' | 'book';
+  type: 'run' | 'book' | 'other';
   title: string;
   isActive: boolean;
 }

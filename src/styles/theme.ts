@@ -9,7 +9,7 @@ export default {
     attention: '#E83F5B',
     success: '#12A454',
 
-    gray_light: '#d3d3d3'
+    gray_light: '#F1f1f1'
   },
   fonts: {
     regular: 'Poppins_400Regular',

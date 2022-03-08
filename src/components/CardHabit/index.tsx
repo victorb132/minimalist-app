@@ -25,7 +25,9 @@ export function CardHabit({
   return (
     <Container {...rest}>
       <EmojiContainer>
-        <Emoji>{name === 'run' ? '🏃🏾‍♂️' : ''}</Emoji>
+        {name === 'run' && <Emoji>{'🏃🏾‍♂️'}</Emoji>}
+        {name === 'book'&& <Emoji>{'📚'}</Emoji>}
+        {name === 'other'&& <Emoji>{'⏳'}</Emoji>}
       </EmojiContainer>
       <TaskContainer>
         <TaskTitle>{title}</TaskTitle>

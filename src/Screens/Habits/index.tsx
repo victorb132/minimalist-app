@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
 import { InputForm } from '../../components/Forms/InputForm';
 import { Button } from '../../components/Forms/Button';
 import { CategorySelectButton } from '../../components/Forms/CategorySelectButton';
+import { TransactionTypeButton } from '../../components/Forms/TransactionTypeButton';
 
 import avatar from '../../../assets/avatar.png';
 
@@ -20,40 +24,105 @@ import {
   ContainerCategory,
   TransactionsTypes
 } from './styles';
-import { TransactionTypeButton } from '../../components/Forms/TransactionTypeButton';
 
 const schema = Yup.object().shape({
-  name: Yup
+  title: Yup
     .string()
-    .required('Nome é obrigatório'),
+    .required('Título é obrigatório'),
 
-  amount: Yup
+  times: Yup
     .number()
     .typeError('Informe um valor numérico')
     .positive('O valor não pode ser negativo')
     .required('O valor é obrigatório'),
 })
 
+interface FormData {
+  title: string;
+  times: string;
+  timer: string;
+}
+
 export function Habits() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [transactionType, setTransactionType] = useState('run');
-
   const [category, setCategory] = useState({
     key: 'category',
     name: 'Categoria'
   });
 
-  function handleTransactionsTypeSelect(type: 'run' | 'book') {
+  const navigation = useNavigation();
+
+  function handleTransactionsTypeSelect(type: 'run' | 'book' | 'other') {
     setTransactionType(type)
   }
 
   function toggleModal() {
     setModalVisible(!isModalVisible);
-    setCategory({
-      key: transactionType,
-      name: transactionType === 'run' ? 'Exercício' : 'Leitura'
-    })
+    if(transactionType === 'run') {
+      setCategory({
+        key: transactionType,
+        name: 'Exercício'
+      })
+    } else if(transactionType === 'book') {
+      setCategory({
+        key: transactionType,
+        name: 'Leitura'
+      })
+    } else {
+      setCategory({
+        key: transactionType,
+        name: 'Outro'
+      })
+    }
   };
+
+  const storageKey = '@minimalistapp:habits_user'
+
+  async function handleRegister(form: FormData) {
+
+    if(category.key === 'category') {
+      return Alert.alert('Selecione a categoria');
+    }
+
+    const newHabit = {
+      title: form.title,
+      times: form.times,
+      timer: form.timer,
+      type: transactionType,
+      category: category.key,
+      date: new Date()
+    }
+
+    try {
+
+      const dataKey = `${storageKey}:userId`;
+
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const dataFormatted = [
+        ...currentData,
+        newHabit
+      ];
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted))
+
+      reset();
+      setTransactionType('run');
+      setCategory({
+        key: 'category',
+        name: 'Categoria',
+      });
+
+      navigation.navigate('Home')
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível salvar');
+    }
+
+  }
 
   const {
     control,
@@ -102,7 +171,7 @@ export function Habits() {
           onPress={toggleModal}
         />
 
-        <Button title="Salvar" onPress={() => { }} />
+        <Button title="Salvar" onPress={handleSubmit(handleRegister)} />
       </Form>
 
       <ModalCategory isVisible={isModalVisible}>
@@ -119,6 +188,12 @@ export function Habits() {
               title="Leitura"
               onPress={() => handleTransactionsTypeSelect('book')}
               isActive={transactionType === 'book'}
+            />
+            <TransactionTypeButton
+              type="other"
+              title="Outro"
+              onPress={() => handleTransactionsTypeSelect('other')}
+              isActive={transactionType === 'other'}
             />
           </TransactionsTypes>
           <Button

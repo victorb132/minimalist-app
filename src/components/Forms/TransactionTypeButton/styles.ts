@@ -4,7 +4,7 @@ import { RectButton } from 'react-native-gesture-handler';
 
 interface ContainerProps {
   isActive: boolean;
-  type: 'run' | 'book';
+  type: 'run' | 'book' | 'other';
 }
 
 export const Container = styled.View<ContainerProps>`
@@ -21,6 +21,10 @@ export const Container = styled.View<ContainerProps>`
   `};
 
   ${({ isActive, type }) => isActive && type === 'book' && css`
+    background-color: ${({ theme }) => theme.colors.success};
+  `};
+
+  ${({ isActive, type }) => isActive && type === 'other' && css`
     background-color: ${({ theme }) => theme.colors.success};
   `};
 
