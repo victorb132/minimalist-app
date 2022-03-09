@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RouteProp } from '@react-navigation/native';
 import { Button } from '../../components/Forms/Button';
 
 import {
@@ -14,35 +16,69 @@ import {
 } from './styles';
 
 interface TimerProps {
-  minutes?: number;
+  route: RouteProp<{ params: { 
+    category: string;
+    date: string;
+    id: string;
+    timer: number;
+    times: number;
+    timesDone: number;
+    title: string;
+    type: string;
+   } }, 'params'>;
 }
-interface RemaningProps {
+interface HabitProps {
+  id: string;
+  timesDone: number;
+}
+interface RemainingProps {
   remainingTime: number;
 }
 
-export function Timer({ minutes = 100 }: TimerProps){
-
+export function Timer({ route }: TimerProps){
+  const storageKeyHabits = '@minimalistapp:habits_user'
+  
   const navigation = useNavigation();
 
-  const children = ({ remainingTime }: RemaningProps) => {
-    const minutes = Math.floor(remainingTime / 60)
+  const habit = route.params
+
+  async function handleUpdateTimes(){
+    try {
+
+      const dataKey = `${storageKeyHabits}:userId`;
+
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const updateTimesDone = currentData.map((data: HabitProps) => data.id === habit.id ? {...data, timesDone: data.timesDone + 1} : data)
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(updateTimesDone))
+
+      navigation.navigate('Home')
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível concluir');
+    }
+  }
+
+  const children = ({ remainingTime }: RemainingProps) => {
+    const minutesChildren = Math.floor(remainingTime / 60)
     const seconds = remainingTime % 60
     const secondsWithZero = String(seconds).padStart(2, '0')
-
-    console.log('remainingTime', remainingTime)
 
     if(remainingTime === 0) {
       Alert.alert('Parabéns', 'Você finalizou seu hábito', [
         {
           text: "Concluir o hábito",
-          onPress: () => navigation.navigate('Home')
+          onPress: () => handleUpdateTimes()
         }
       ])
     }
 
     return(
     <TimerText>
-      {remainingTime === 0 ? '0' : `${minutes}:${secondsWithZero}`}
+      {remainingTime === 0 ? '0' : `${minutesChildren}:${secondsWithZero}`}
     </TimerText>)
   }
 
@@ -50,7 +86,7 @@ export function Timer({ minutes = 100 }: TimerProps){
     Alert.alert('Atenção', 'Caso você volte o seu hábito contara como feito', [
       {
         text: 'Concluir o hábito',
-        onPress: () => navigation.navigate('Home')
+        onPress: () => handleUpdateTimes()
       },
       {
         text: 'Cancelar',
@@ -63,11 +99,11 @@ export function Timer({ minutes = 100 }: TimerProps){
     <Container>
       <AlignVerticalView>
         <ViewTitle>
-          <Title>Habito!</Title>
+          <Title>{habit.title}</Title>
         </ViewTitle>
         <CountdownCircleTimer
           isPlaying
-          duration={minutes}
+          duration={Number(habit.timer)}
           colors={['#000', '#F7B801', '#A30000', '#A30000']}
           colorsTime={[7, 5, 2, 0]}
         >

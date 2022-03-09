@@ -1,8 +1,19 @@
 import styled from 'styled-components/native';
+import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 interface TaskProps {
   checked: boolean;
+}
+
+interface HabitProps {
+  id: string;
+  category: string;
+  timer: string;
+  times: number;
+  timesDone: number;
+  title: string;
+  type: string;
 }
 
 export const Container = styled.ScrollView`
@@ -62,7 +73,7 @@ export const HabitsTitle = styled.Text`
   color: ${({ theme }) => theme.colors.sub_title};
 `;
 
-export const WrapperCards = styled.View`
+export const WrapperCards = styled(FlatList as new () => FlatList<HabitProps>)`
   padding: 0 40px 0px 0px;
 `;
 
@@ -88,5 +99,8 @@ export const TitleMiniTask = styled.Text<TaskProps>`
   font-size: ${RFValue(15)}px;
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme }) => theme.colors.primary};
+  width: 85% ;
   text-decoration: ${({ checked }) => checked && 'line-through'};
 `;
+
+export const ButtonRemove = styled.TouchableOpacity``;

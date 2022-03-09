@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 
 import { CheckBox } from '../../components/Checkbox';
 import { CardHabit } from '../../components/CardHabit'
+
 
 import avatar from '../../../assets/avatar.png';
 
@@ -22,7 +25,8 @@ import {
   TitleMiniTask,
   MiniTaskTitle,
   WrapperCards,
-  ContentTask
+  ContentTask,
+  ButtonRemove
 } from './styles';
 
 interface HabitProps {
@@ -41,7 +45,7 @@ interface TaskProps {
   title: string;
 }
 
-export function Home(){
+export function Home() {
   const [habits, setHabits] = useState<HabitProps[]>([]);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
 
@@ -52,7 +56,7 @@ export function Home(){
 
 
   function handleChangeCheckbox(idTask: string) {
-    setTasks(tasks.map(task => task.id === idTask ? {...task, checked: !task.checked} : task))
+    setTasks(tasks.map(task => task.id === idTask ? { ...task, checked: !task.checked } : task))
   }
 
   async function loadHabits() {
@@ -65,8 +69,6 @@ export function Home(){
     const habits = response ? JSON.parse(response) : []
 
     setHabits(habits);
-
-    // setIsLoading(false);
   }
 
   async function loadTasks() {
@@ -79,14 +81,82 @@ export function Home(){
     const tasks = response ? JSON.parse(response) : []
 
     setTasks(tasks);
-
-    console.log('tasks', tasks)
-
-    // setIsLoading(false);
   }
 
   async function handleTimer(habit: HabitProps) {
-    navigation.navigate('Timer')
+    navigation.navigate('Timer', habit)
+  }
+
+  async function handleRemoveHabits(habitId: string) {
+
+    Alert.alert('Remover', `Deseja remover este hábito?`, [
+      {
+        text: 'Não 🙏🏼',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😄',
+        onPress: async () => {
+          try {
+            const dataKey = `${storageKeyHabits}:userId`;
+
+            const response = await AsyncStorage.getItem(dataKey);
+            const habits = response ? JSON.parse(response) : []
+
+            const removeIndex = habits.findIndex((item: HabitProps) => item.id === habitId)
+            
+            habits.splice(removeIndex, 1);
+            
+            await AsyncStorage.setItem(
+              dataKey,
+              JSON.stringify(habits)
+              );
+              
+            setHabits((oldData) =>
+              oldData.filter((item) => item.id !== habitId)
+            );
+          } catch (error) {
+            Alert.alert('Não foi possível remover! 🥲');
+          }
+        }
+      }
+    ])
+  }
+
+  async function handleRemoveTasks(taskId: string) {
+
+    Alert.alert('Remover', `Deseja remover esta Task?`, [
+      {
+        text: 'Não 🙏🏼',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😄',
+        onPress: async () => {
+          try {
+            const dataKey = `${storageKeyTasks}:userId`;
+
+            const response = await AsyncStorage.getItem(dataKey);
+            const tasks = response ? JSON.parse(response) : []
+
+            const removeIndex = tasks.findIndex((item: TaskProps) => item.id === taskId)
+            
+            tasks.splice(removeIndex, 1);
+            
+            await AsyncStorage.setItem(
+              dataKey,
+              JSON.stringify(tasks)
+              );
+              
+            setTasks((oldData) =>
+              oldData.filter((item) => item.id !== taskId)
+            );
+          } catch (error) {
+            Alert.alert('Não foi possível remover! 🥲');
+          }
+        }
+      }
+    ])
   }
 
   useEffect(() => {
@@ -98,12 +168,18 @@ export function Home(){
     loadHabits();
     loadTasks();
   }, []));
-  
+
+  const renderHabitsItem = ({ item }: { item: HabitProps }) => {
+    return (
+      <CardHabit key={item.id} title={item.title} times={String(item.times)} timesDone={item.timesDone} name={item.category} onPress={() => handleTimer(item)} handleRemove={() => handleRemoveHabits(item.id)} />
+    )
+  };
+
   return (
-    <Container>
+    <Container showsVerticalScrollIndicator={false}>
       <Header>
         <ProfileAvatar>
-          <AvatarImage source={avatar}/>
+          <AvatarImage source={avatar} />
         </ProfileAvatar>
       </Header>
 
@@ -112,7 +188,7 @@ export function Home(){
         <SubTitle>Vamos enfrentar o dia.</SubTitle>
       </ContentText>
 
-      {habits?.length === 0 && tasks?.length === 0 && 
+      {habits?.length === 0 && tasks?.length === 0 &&
         <ContentText style={{
           flex: 1,
           alignItems: 'center',
@@ -128,33 +204,40 @@ export function Home(){
             fontSize: 16,
             textAlign: 'center',
           }}>Crie um novo hábito ou tarefa para aparecer aqui.</SubTitle>
-      </ContentText>
+        </ContentText>
       }
 
-      {habits?.length > 0 && 
-      <Habits>
-        <HabitsTitle>HÁBITOS</HabitsTitle>
-        <WrapperCards>
-          {habits.map((habit) => 
-            <CardHabit key={habit.id} title={habit.title} times={String(habit.times)} timesDone={habit.timesDone} name={habit.category} onPress={() => handleTimer(habit)} />
-          )}
-        </WrapperCards>
+      {habits?.length > 0 &&
+        <Habits>
+          <HabitsTitle>HÁBITOS</HabitsTitle>
+          <WrapperCards
+            data={habits}
+            renderItem={renderHabitsItem}
+            keyExtractor={item => item.id}
+            nestedScrollEnabled
+          >
+          </WrapperCards>
 
-      </Habits>}
+        </Habits>}
 
-      
+
       {tasks?.length > 0 &&
-      <MiniTask>
-        <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
-          {tasks.map((task) => 
+        <MiniTask>
+          <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
+          {tasks.map((task) =>
             <ContentTask key={task.id} onPress={() => handleChangeCheckbox(task.id)}>
-              <CheckBox  onPress={() => handleChangeCheckbox(task.id)} selected={task.checked} style={{ marginRight: 5 }} />
+              <CheckBox onPress={() => handleChangeCheckbox(task.id)} selected={task.checked} style={{ marginRight: 5 }} />
               <TitleMiniTask checked={task.checked}>
                 {task.title}
               </TitleMiniTask>
+              <ButtonRemove
+              onPress={() => handleRemoveTasks(task.id)}
+            >
+              <Feather name="trash" size={20} color={'#000'} />
+            </ButtonRemove>
             </ContentTask>
           )}
-      </MiniTask>
+        </MiniTask>
       }
     </Container>
   );
