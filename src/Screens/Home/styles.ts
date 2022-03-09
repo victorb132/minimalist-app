@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+interface TaskProps {
+  checked: boolean;
+}
+
 export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -80,8 +84,9 @@ export const ContentTask = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const TitleMiniTask = styled.Text`
+export const TitleMiniTask = styled.Text<TaskProps>`
   font-size: ${RFValue(15)}px;
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme }) => theme.colors.primary};
+  text-decoration: ${({ checked }) => checked && 'line-through'};
 `;

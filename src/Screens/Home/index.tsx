@@ -37,11 +37,11 @@ interface HabitProps {
 
 interface TaskProps {
   id: string;
+  checked: boolean,
   title: string;
 }
 
 export function Home(){
-  const [miniTask, setMiniTask] = useState(false);
   const [habits, setHabits] = useState<HabitProps[]>([]);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
 
@@ -50,8 +50,9 @@ export function Home(){
   const storageKeyHabits = '@minimalistapp:habits_user'
   const storageKeyTasks = '@minimalistapp:task_user'
 
-  function handleChangeMiniTask() {
-    setMiniTask(!miniTask)
+
+  function handleChangeCheckbox(idTask: string) {
+    setTasks(tasks.map(task => task.id === idTask ? {...task, checked: !task.checked} : task))
   }
 
   async function loadHabits() {
@@ -85,7 +86,7 @@ export function Home(){
   }
 
   async function handleTimer(habit: HabitProps) {
-    navigation.navigate('Timer', undefined)
+    navigation.navigate('Timer')
   }
 
   useEffect(() => {
@@ -146,9 +147,9 @@ export function Home(){
       <MiniTask>
         <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
           {tasks.map((task) => 
-            <ContentTask key={task.id} onPress={handleChangeMiniTask}>
-              <CheckBox  onPress={handleChangeMiniTask} selected={miniTask} style={{ marginRight: 5 }} />
-              <TitleMiniTask>
+            <ContentTask key={task.id} onPress={() => handleChangeCheckbox(task.id)}>
+              <CheckBox  onPress={() => handleChangeCheckbox(task.id)} selected={task.checked} style={{ marginRight: 5 }} />
+              <TitleMiniTask checked={task.checked}>
                 {task.title}
               </TitleMiniTask>
             </ContentTask>

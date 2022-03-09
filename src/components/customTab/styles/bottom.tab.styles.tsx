@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: TAB_BAR_HEIGHT,
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
   },
   bottomFill: {
     width: '100%',

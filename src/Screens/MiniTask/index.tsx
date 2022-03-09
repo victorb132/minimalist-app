@@ -44,6 +44,7 @@ export function MiniTask() {
 
     const newTask = {
       id: String(uuid.v4()),
+      checked: false,
       title: form.title,
       date: new Date()
     }
