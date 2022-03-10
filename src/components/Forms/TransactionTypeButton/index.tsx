@@ -1,5 +1,5 @@
 import React from 'react';
-import { RectButtonProps } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from 'react-native';
 import { Text } from 'react-native';
 
 import {
@@ -14,7 +14,7 @@ const icons = {
   other: '⏳'
 }
 
-interface Props extends RectButtonProps {
+interface Props extends TouchableOpacityProps {
   type: 'run' | 'book' | 'other';
   title: string;
   isActive: boolean;

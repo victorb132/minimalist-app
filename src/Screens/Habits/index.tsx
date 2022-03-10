@@ -55,6 +55,7 @@ export function Habits() {
   const navigation = useNavigation();
 
   function handleTransactionsTypeSelect(type: 'run' | 'book' | 'other') {
+    console.log('AQUI type', type)
     setTransactionType(type)
   }
 

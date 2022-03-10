@@ -30,7 +30,7 @@ export const Container = styled.View<ContainerProps>`
 
 `
 
-export const Button = styled(RectButton)`
+export const Button = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;
