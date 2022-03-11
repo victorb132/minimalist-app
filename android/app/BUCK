@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.minimalistapp",
+    package = "com.minimalistHabits",
 )
 
 android_resource(
     name = "res",
-    package = "com.minimalistapp",
+    package = "com.minimalistHabits",
     res = "src/main/res",
 )
 

@@ -1,4 +1,4 @@
-package com.minimalistapp;
+package com.minimalistHabits;
 
 import android.os.Bundle;
 

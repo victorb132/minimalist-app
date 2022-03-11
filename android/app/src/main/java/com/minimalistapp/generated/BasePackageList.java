@@ -1,4 +1,4 @@
-package com.minimalistapp.generated;
+package com.minimalistHabits.generated;
 
 import java.util.Arrays;
 import java.util.List;
