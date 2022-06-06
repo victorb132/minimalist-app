@@ -83,7 +83,7 @@ export function Home() {
     setTasks(tasks);
   }
 
-  async function handleTimer(habit: HabitProps) {
+  async function handleTimer(habit: any) {
     navigation.navigate('Timer', habit)
   }
 
@@ -104,14 +104,14 @@ export function Home() {
             const habits = response ? JSON.parse(response) : []
 
             const removeIndex = habits.findIndex((item: HabitProps) => item.id === habitId)
-            
+
             habits.splice(removeIndex, 1);
-            
+
             await AsyncStorage.setItem(
               dataKey,
               JSON.stringify(habits)
               );
-              
+
             setHabits((oldData) =>
               oldData.filter((item) => item.id !== habitId)
             );
@@ -140,14 +140,14 @@ export function Home() {
             const tasks = response ? JSON.parse(response) : []
 
             const removeIndex = tasks.findIndex((item: TaskProps) => item.id === taskId)
-            
+
             tasks.splice(removeIndex, 1);
-            
+
             await AsyncStorage.setItem(
               dataKey,
               JSON.stringify(tasks)
               );
-              
+
             setTasks((oldData) =>
               oldData.filter((item) => item.id !== taskId)
             );
@@ -171,12 +171,20 @@ export function Home() {
 
   const renderHabitsItem = ({ item }: { item: HabitProps }) => {
     return (
-      <CardHabit key={item.id} title={item.title} times={String(item.times)} timesDone={item.timesDone} name={item.category} onPress={() => handleTimer(item)} handleRemove={() => handleRemoveHabits(item.id)} />
+      <CardHabit
+        key={item.id}
+        title={item.title}
+        times={String(item.times)}
+        timesDone={item.timesDone}
+        name={item.category}
+        onPress={() => handleTimer(item)}
+        handleRemove={() => handleRemoveHabits(item.id)}
+      />
     )
   };
 
   return (
-    <Container showsVerticalScrollIndicator={false}>
+    <Container>
       <Header>
         <ProfileAvatar>
           <AvatarImage source={avatar} />
@@ -226,7 +234,11 @@ export function Home() {
           <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
           {tasks.map((task) =>
             <ContentTask key={task.id} onPress={() => handleChangeCheckbox(task.id)}>
-              <CheckBox onPress={() => handleChangeCheckbox(task.id)} selected={task.checked} style={{ marginRight: 5 }} />
+              <CheckBox 
+                onPress={() => handleChangeCheckbox(task.id)}
+                selected={task.checked}
+                style={{ marginRight: 5 }}
+              />
               <TitleMiniTask checked={task.checked}>
                 {task.title}
               </TitleMiniTask>

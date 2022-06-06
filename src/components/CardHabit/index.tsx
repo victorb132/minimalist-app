@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
   Animated,
   TouchableOpacityProps,
+  View,
 } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Feather } from '@expo/vector-icons';
 
 import {
+  ButtonRemove,
   Container,
   EmojiContainer,
   Emoji,
   TaskContainer,
   TaskTitle,
-  TaskSubTitle,
-  ButtonRemove
+  TaskSubTitle
 } from './styles';
 
 interface CardHabitProps extends TouchableOpacityProps {
@@ -23,6 +23,7 @@ interface CardHabitProps extends TouchableOpacityProps {
   timesDone: number;
   name: string;
   handleRemove: () => void;
+  onPress: () => void;
 }
 
 export function CardHabit({
@@ -31,16 +32,19 @@ export function CardHabit({
   timesDone,
   name,
   handleRemove,
-  ...rest
+  onPress,
 }: CardHabitProps) {
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    if (Number(timesDone) >= Number(times)) {
+    const disableButtonIfFinishedDayTimes = () => Number(timesDone) >= Number(times);
+
+    if (disableButtonIfFinishedDayTimes()) {
       setDisable(true);
-    } else {
-      setDisable(false);
+      return;
     }
+
+    setDisable(false);
   }, [timesDone])
 
   return (
@@ -59,7 +63,7 @@ export function CardHabit({
 
       )}
     >
-      <Container disabled={disable} {...rest}>
+      <Container disabled={disable} onPress={onPress}>
         <EmojiContainer>
           {name === 'run' && <Emoji disabled={disable}>{'🏃🏾‍♂️'}</Emoji>}
           {name === 'book' && <Emoji disabled={disable}>{'📚'}</Emoji>}

@@ -13,9 +13,9 @@ interface CheckBoxProps extends TouchableOpacityProps {
   color?: string;
 }
 
-export function CheckBox({ selected, onPress, size = 20, color = '#000', ...rest }: CheckBoxProps) {
+export function CheckBox({ selected, onPress, size = 20, color = '#000' }: CheckBoxProps) {
   return (
-    <Container onPress={onPress} {...rest}>
+    <Container onPress={onPress}>
       <Feather
         size={size}
         color={color}

@@ -32,28 +32,28 @@ export function AppTabRoutes(){
         activeTintColor: theme.colors.primary
       }}
     >
-      <Screen 
+      <Screen
         name="Home"
         component={Home}
-        options={{ 
+        options={{
           tabBarIcon: (({ color }) => (
             <HomeSvg width={30} height={30} fill={color} />
           ))
         }}
       />
-      <Screen 
+      <Screen
         name="Habits"
         component={Habits}
-        options={{ 
+        options={{
           tabBarIcon: (({ color }) => (
             <AppleSvg width={30} height={30} fill={color} />
           ))
         }}
       />
-      <Screen 
+      <Screen
         name="MiniTask"
         component={MiniTask}
-        options={{ 
+        options={{
           tabBarIcon: (({ color }) => (
             <RegisterSvg width={30} height={30} fill={color} />
           ))

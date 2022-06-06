@@ -16,7 +16,7 @@ import {
 } from './styles';
 
 interface TimerProps {
-  route: RouteProp<{ params: { 
+  route: RouteProp<{ params: {
     category: string;
     date: string;
     id: string;
@@ -37,7 +37,7 @@ interface RemainingProps {
 
 export function Timer({ route }: TimerProps){
   const storageKeyHabits = '@minimalistapp:habits_user'
-  
+
   const navigation = useNavigation();
 
   const habit = route.params

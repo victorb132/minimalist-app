@@ -7,20 +7,17 @@ interface Props {
 }
 
 export const Container = styled(TextInput)<Props>`
-  width: 100%;
-  padding: 16px 18px;
-
-  font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: ${RFValue(14)}px;
-  color: ${({ theme }) => theme.colors.title};
-
   background-color: ${({ theme }) => theme.colors.gray_light};
   border-radius: 5px;
-
+  color: ${({ theme }) => theme.colors.title};
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(14)}px;
   margin-bottom: 8px;
+  padding: 16px 18px;
+  width: 100%;
 
   ${({ active, theme }) => active && css`
+  border-color: ${theme.colors.attention};
     border-width: 3px;
-    border-color: ${theme.colors.attention};
   `};
 `;
