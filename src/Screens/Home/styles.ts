@@ -16,7 +16,7 @@ interface HabitProps {
   type: string;
 }
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
   flex: 1;
 `;
@@ -62,7 +62,7 @@ export const SubTitle = styled.Text`
 
 export const Habits = styled.View`
   padding-left: 20px;
-  padding-top: 40px;
+  padding-top: 30px;
 `;
 
 export const HabitsTitle = styled.Text`
@@ -72,7 +72,7 @@ export const HabitsTitle = styled.Text`
 `;
 
 export const WrapperCards = styled(FlatList as new () => FlatList<HabitProps>)`
-  padding: 0 40px 0px 0px;
+  padding: 0 30px 0px 0px;
 `;
 
 export const MiniTask = styled.View`

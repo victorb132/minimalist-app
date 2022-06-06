@@ -23,6 +23,7 @@ interface CardHabitProps extends TouchableOpacityProps {
   timesDone: number;
   name: string;
   handleRemove: () => void;
+  onPress: () => void;
 }
 
 export function CardHabit({
@@ -31,7 +32,7 @@ export function CardHabit({
   timesDone,
   name,
   handleRemove,
-  ...rest
+  onPress,
 }: CardHabitProps) {
   const [disable, setDisable] = useState(false);
 
@@ -62,7 +63,7 @@ export function CardHabit({
 
       )}
     >
-      <Container disabled={disable} {...rest}>
+      <Container disabled={disable} onPress={onPress}>
         <EmojiContainer>
           {name === 'run' && <Emoji disabled={disable}>{'🏃🏾‍♂️'}</Emoji>}
           {name === 'book' && <Emoji disabled={disable}>{'📚'}</Emoji>}

@@ -2,11 +2,11 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
-  flex: 1;
-  width: 100%;
   align-items: center;
-  justify-content: center;
   background-color: ${({ theme }) => theme.colors.secondary};
+  flex: 1;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const TimerText = styled.Text.attrs({
@@ -17,13 +17,12 @@ export const TimerText = styled.Text.attrs({
   font-size: 24px;
 `;
 
-export const ViewTitle = styled.View`
-`;
+export const ViewTitle = styled.View``;
 
 export const Title = styled.Text`
-  font-size: ${RFValue(25)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.primary};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(25)}px;
   text-align: center;
 `;
 
@@ -33,7 +32,7 @@ export const ViewButton = styled.View`
 
 export const AlignVerticalView = styled.View`
   flex: 1;
-  width: 100%;
-  padding: 100px;
   justify-content: space-between;
+  padding: 100px;
+  width: 100%;
 `;

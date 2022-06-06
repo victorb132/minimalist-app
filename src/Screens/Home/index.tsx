@@ -83,7 +83,7 @@ export function Home() {
     setTasks(tasks);
   }
 
-  async function handleTimer(habit: HabitProps) {
+  async function handleTimer(habit: any) {
     navigation.navigate('Timer', habit)
   }
 
@@ -184,7 +184,7 @@ export function Home() {
   };
 
   return (
-    <Container showsVerticalScrollIndicator={false}>
+    <Container>
       <Header>
         <ProfileAvatar>
           <AvatarImage source={avatar} />

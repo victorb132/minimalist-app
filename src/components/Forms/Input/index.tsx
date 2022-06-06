@@ -14,9 +14,9 @@ export function Input({
   ...rest
 }: Props){
   return(
-    <Container 
+    <Container
       active={active}
-      {...rest} 
+      {...rest}
     />
   )
 }

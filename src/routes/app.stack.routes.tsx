@@ -17,11 +17,11 @@ export function AppStackRoutes(){
     <Navigator initialRouteName="Home" screenOptions={{
       headerShown: false
     }}>
-      <Screen 
+      <Screen
         name="AppTab"
         component={AppTabRoutes}
       />
-      <Screen 
+      <Screen
         name="Timer"
         component={Timer}
       />

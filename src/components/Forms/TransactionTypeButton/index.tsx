@@ -20,10 +20,10 @@ interface Props extends TouchableOpacityProps {
   isActive: boolean;
 }
 
-export function TransactionTypeButton({ type, title, isActive, ...rest }: Props) {
+export function TransactionTypeButton({ type, title, isActive, onPress }: Props) {
   return (
     <Container isActive={isActive} type={type}>
-      <Button {...rest}>
+      <Button onPress={onPress}>
       <Text>{icons[type]}</Text>
         <Title>
           {title}

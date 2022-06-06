@@ -2,47 +2,43 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 import Modal from 'react-native-modal';
 
-export const Container = styled.ScrollView`
-  flex: 1;
+export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
+  flex: 1;
 `;
 
 export const Header = styled.View`
-  width: 100%;
-  height: 113px;
-  
-  justify-content: flex-end;
   align-items: flex-end;
+  height: 113px;
+  justify-content: flex-end;
   padding: 10px 24px;
+  width: 100%;
 `;
 
 export const ProfileAvatar = styled.View`
-  width: 50px;
-  height: 50px;
-  border-radius: 90px;
-
   background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 90px;
+  height: 50px;
   margin-top: 48px;
+  width: 50px;
 `;
 
 export const AvatarImage = styled.Image`
-  width: 50px;
-  height: 50px;
   border-radius: 90px;
+  height: 50px;
+  width: 50px;
 `;
 
 export const Form = styled.View`
   flex: 1;
-  width: 100%;
-
   padding: 24px;
+  width: 100%;
 `;
 
 export const TitlePage = styled.Text`
-  font-size: ${RFValue(25)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.primary};
-  
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(25)}px;
   padding-left: 24px;
 `;
 
@@ -52,16 +48,16 @@ export const ModalCategory = styled(Modal as any)`
 `;
 
 export const ContainerCategory = styled.View`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 22px;
-  justify-content: center;
   align-items: center;
-  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.secondary};
   border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  justify-content: center;
+  padding: 22px;
 `;
 
 export const TransactionsTypes = styled.View`
-  margin-top: 8px;
   margin-bottom: 16px;
+  margin-top: 8px;
   width: 100%;
 `
