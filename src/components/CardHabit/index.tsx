@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
   Animated,
   TouchableOpacityProps,
+  View,
 } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { Feather } from '@expo/vector-icons';
 
 import {
+  ButtonRemove,
   Container,
   EmojiContainer,
   Emoji,
   TaskContainer,
   TaskTitle,
-  TaskSubTitle,
-  ButtonRemove
+  TaskSubTitle
 } from './styles';
 
 interface CardHabitProps extends TouchableOpacityProps {
@@ -36,11 +36,14 @@ export function CardHabit({
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    if (Number(timesDone) >= Number(times)) {
+    const disableButtonIfFinishedDayTimes = () => Number(timesDone) >= Number(times);
+
+    if (disableButtonIfFinishedDayTimes()) {
       setDisable(true);
-    } else {
-      setDisable(false);
+      return;
     }
+
+    setDisable(false);
   }, [timesDone])
 
   return (

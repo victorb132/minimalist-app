@@ -17,32 +17,30 @@ interface HabitProps {
 }
 
 export const Container = styled.ScrollView`
-  flex: 1;
   background-color: ${({ theme }) => theme.colors.secondary};
+  flex: 1;
 `;
 
 export const Header = styled.View`
-  width: 100%;
-  height: 113px;
-  
-  justify-content: flex-end;
   align-items: flex-end;
+  height: 113px;
+  justify-content: flex-end;
   padding: 10px 24px;
+  width: 100%;
 `;
 
 export const ProfileAvatar = styled.View`
-  width: 50px;
-  height: 50px;
-  border-radius: 90px;
-
   background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 90px;
+  height: 50px;
   margin-top: 48px;
+  width: 50px;
 `;
 
 export const AvatarImage = styled.Image`
-  width: 50px;
-  height: 50px;
   border-radius: 90px;
+  height: 50px;
+  width: 50px;
 `;
 
 export const ContentText = styled.View`
@@ -51,15 +49,15 @@ export const ContentText = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: ${RFValue(25)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.primary};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(25)}px;
 `;
 
 export const SubTitle = styled.Text`
-  font-size: ${RFValue(15)}px;
   color: ${({ theme }) => theme.colors.sub_title};
   font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(15)}px;
 `;
 
 export const Habits = styled.View`
@@ -68,9 +66,9 @@ export const Habits = styled.View`
 `;
 
 export const HabitsTitle = styled.Text`
-  font-size: ${RFValue(12)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.sub_title};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(12)}px;
 `;
 
 export const WrapperCards = styled(FlatList as new () => FlatList<HabitProps>)`
@@ -83,24 +81,23 @@ export const MiniTask = styled.View`
 `;
 
 export const MiniTaskTitle = styled.Text`
-  font-size: ${RFValue(12)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.sub_title};
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(12)}px;
 `;
 
 export const ContentTask = styled.TouchableOpacity`
+  align-items: center;
   flex-direction: row;
   margin-top: 20px;
-  
-  align-items: center;
 `;
 
 export const TitleMiniTask = styled.Text<TaskProps>`
-  font-size: ${RFValue(15)}px;
-  font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme }) => theme.colors.primary};
-  width: 85% ;
+  font-family: ${({ theme }) => theme.fonts.medium};
+  font-size: ${RFValue(15)}px;
   text-decoration: ${({ checked }) => checked && 'line-through'};
+  width: 85% ;
 `;
 
 export const ButtonRemove = styled.TouchableOpacity``;
