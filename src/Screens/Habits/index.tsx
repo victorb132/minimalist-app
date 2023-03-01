@@ -55,18 +55,17 @@ export function Habits() {
   const navigation = useNavigation();
 
   function handleTransactionsTypeSelect(type: 'run' | 'book' | 'other') {
-    console.log('AQUI type', type)
     setTransactionType(type)
   }
 
   function toggleModal() {
     setModalVisible(!isModalVisible);
-    if(transactionType === 'run') {
+    if (transactionType === 'run') {
       setCategory({
         key: transactionType,
         name: 'Exercício'
       })
-    } else if(transactionType === 'book') {
+    } else if (transactionType === 'book') {
       setCategory({
         key: transactionType,
         name: 'Leitura'
@@ -81,9 +80,9 @@ export function Habits() {
 
   const storageKey = '@minimalistapp:habits_user'
 
-  async function handleRegister(form: FormData) {
+  async function handleRegister(form: any) {
 
-    if(category.key === 'category') {
+    if (category.key === 'category') {
       return Alert.alert('Selecione a categoria');
     }
 
@@ -154,21 +153,21 @@ export function Habits() {
           placeholder="Título"
           autoCapitalize="sentences"
           autoCorrect={false}
-          error={errors.name && errors.name.message}
+          error={errors.title && errors.title.message}
         />
         <InputForm
           name="times"
           control={control}
           placeholder="Quantas vezes ao dia?"
           keyboardType="number-pad"
-          error={errors.name && errors.name.message}
+          error={errors.times && errors.times.message}
         />
         <InputForm
           name="timer"
           control={control}
           placeholder="Quanto tempo cada vez?"
           keyboardType="number-pad"
-          error={errors.name && errors.name.message}
+          error={errors.timer && errors.timer.message}
         />
         <CategorySelectButton
           title={category.name}

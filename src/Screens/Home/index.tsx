@@ -110,7 +110,7 @@ export function Home() {
             await AsyncStorage.setItem(
               dataKey,
               JSON.stringify(habits)
-              );
+            );
 
             setHabits((oldData) =>
               oldData.filter((item) => item.id !== habitId)
@@ -146,7 +146,7 @@ export function Home() {
             await AsyncStorage.setItem(
               dataKey,
               JSON.stringify(tasks)
-              );
+            );
 
             setTasks((oldData) =>
               oldData.filter((item) => item.id !== taskId)
@@ -199,10 +199,7 @@ export function Home() {
       {habits?.length === 0 && tasks?.length === 0 &&
         <ContentText style={{
           flex: 1,
-          alignItems: 'center',
           justifyContent: 'center',
-          alignSelf: 'center',
-          marginTop: 200
         }}>
           <Title style={{
             fontSize: 18,
@@ -221,11 +218,9 @@ export function Home() {
           <WrapperCards
             data={habits}
             renderItem={renderHabitsItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item: HabitProps) => item.id}
             nestedScrollEnabled
-          >
-          </WrapperCards>
-
+          />
         </Habits>}
 
 
@@ -234,7 +229,7 @@ export function Home() {
           <MiniTaskTitle>MINI TAREFAS</MiniTaskTitle>
           {tasks.map((task) =>
             <ContentTask key={task.id} onPress={() => handleChangeCheckbox(task.id)}>
-              <CheckBox 
+              <CheckBox
                 onPress={() => handleChangeCheckbox(task.id)}
                 selected={task.checked}
                 style={{ marginRight: 5 }}
@@ -243,10 +238,10 @@ export function Home() {
                 {task.title}
               </TitleMiniTask>
               <ButtonRemove
-              onPress={() => handleRemoveTasks(task.id)}
-            >
-              <Feather name="trash" size={20} color={'#000'} />
-            </ButtonRemove>
+                onPress={() => handleRemoveTasks(task.id)}
+              >
+                <Feather name="trash" size={20} color={'#000'} />
+              </ButtonRemove>
             </ContentTask>
           )}
         </MiniTask>

@@ -4,7 +4,7 @@ import 'react-native-reanimated'
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
-import {LogBox} from "react-native";
+import { LogBox } from "react-native";
 
 import {
   useFonts,
@@ -30,7 +30,7 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View style={{ height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size='large' color='black'/>
+        <ActivityIndicator size='large' color='black' />
       </View>
     )
   }

@@ -60,7 +60,6 @@ export function CardHabit({
             </ButtonRemove>
           </View>
         </Animated.View>
-
       )}
     >
       <Container disabled={disable} onPress={onPress}>

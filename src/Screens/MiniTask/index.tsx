@@ -21,10 +21,6 @@ import {
   TitlePage,
 } from './styles';
 
-interface FormData {
-  title: string;
-}
-
 const schema = Yup.object().shape({
   title: Yup
     .string()
@@ -36,9 +32,9 @@ export function MiniTask() {
 
   const storageKey = '@minimalistapp:task_user'
 
-  async function handleRegister(form: FormData) {
+  async function handleRegister(form: any) {
 
-    if(form.title === '') {
+    if (form.title === '') {
       return Alert.alert('Digite um tarefa');
     }
 

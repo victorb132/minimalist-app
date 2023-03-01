@@ -71,9 +71,9 @@ export const HabitsTitle = styled.Text`
   font-size: ${RFValue(12)}px;
 `;
 
-export const WrapperCards = styled(FlatList as new () => FlatList<HabitProps>)`
+export const WrapperCards = (styled.FlatList`
   padding: 0 30px 0px 0px;
-`;
+` as unknown) as typeof FlatList;
 
 export const MiniTask = styled.View`
   padding-left: 20px;

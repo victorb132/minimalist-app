@@ -12,7 +12,7 @@ import {
 interface Props extends TextInputProps {
   control: Control;
   name: string;
-  error: string;
+  error: any;
 }
 
 export function InputForm({
@@ -20,12 +20,12 @@ export function InputForm({
   name,
   error,
   ...rest
-}: Props){
-  return(
+}: Props) {
+  return (
     <Container>
       <Controller
         control={control}
-        render={({field: { onChange, value}}) => (
+        render={({ field: { onChange, value } }) => (
           <Input
             onChangeText={onChange}
             value={value}
